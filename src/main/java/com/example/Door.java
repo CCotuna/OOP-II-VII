@@ -2,11 +2,6 @@ package com.example;
 
 import java.time.LocalDate;
 
-//@Getter
-//@Setter
-//@AllArgsConstructor
-//@NoArgsConstructor
-// -> construiesc ceea ce le zice numele fara a scrie cod
 public class Door {
 	
 	private int id;
