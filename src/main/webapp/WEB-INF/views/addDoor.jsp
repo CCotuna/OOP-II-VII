@@ -7,13 +7,23 @@
 <title>Add a Door</title>
 </head>
 <body>
-<h1>Create a Door</h1>
-	<form action="/Woods-MVC/doors/create" method="post">
-		<input type="text" name="material">
-		<input type="number" name="height">
-		<input type="number" name="width">
-		<input type="date" name="installationDate">
-		<input type="submit" value="Submit">
+	<form action="/Woods-MVC/doors/create" method="post" class="p-10">
+		<h1 class="text-4xl my-2"><b>Create a Door</b></h1>
+		<div class="border-b border-teal-500 w-min my-2">
+			<input type="text" name="material" placeholder="New Material" class="appearance-none bg-transparent border-none text-gray-700 mr-3 py-1 px-2 leading-tight focus:outling-none">
+		</div>
+		<div class="border-b border-teal-500 w-min my-2">
+			<input type="number" name="height" placeholder="New Height" class="appearance-none bg-transparent border-none text-gray-700 mr-3 py-1 px-2 leading-tight focus:outling-none">
+		</div>
+		<div class="border-b border-teal-500 w-min my-2">
+			<input type="number" name="width" placeholder="New Width" class="appearance-none bg-transparent border-none text-gray-700 mr-3 py-1 px-2 leading-tight focus:outling-none">	
+		</div>
+		<div class="border-b border-teal-500 w-min my-2">
+			<input type="date" name="installationDate" placeholder="New Installation Date" class="appearance-none bg-transparent border-none text-gray-700 mr-3 py-1 px-2 leading-tight focus:outling-none">	
+		</div>
+		<input type="submit" value="Submit" class="justify-center flex md:hover:text-white md:hover:bg-black text-white rounded-md bg-teal-500 py-2 px-4 mt-2">
 	</form>
+	
+	<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
