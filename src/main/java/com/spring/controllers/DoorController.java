@@ -1,9 +1,11 @@
-package com.example;
+package com.spring.controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import com.spring.pojo.*;
+import com.spring.dao.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +25,14 @@ public class DoorController {
 	@RequestMapping(value = "/doors/{id}", method=RequestMethod.GET)
 	
 	public ModelAndView doorPageByID (@PathVariable int id) throws SQLException, IOException {
-		System.out.println("id-ul este : " + id);
+		ModelAndView mav = new ModelAndView("single-door");
 		
-		int totalDoors = doorDao.getTotalDoors();
+		Door door = doorDao.getById(id);
 		
-		if (id > totalDoors) {
+		if (door == null) {
 			ModelAndView mavError = new ModelAndView("errorPage");
 			return mavError;
 		}
-		
-		ModelAndView mav = new ModelAndView("single-door");
-		Door door = doorDao.getById(id);
 		mav.addObject("door", door);
 		
 		return mav;
@@ -41,7 +40,7 @@ public class DoorController {
 	}
 
 	@GetMapping("/doors")
-	 ModelAndView getAllDoors() throws SQLException {
+	public ModelAndView getAllDoors() throws SQLException {
 		ModelAndView mav = new ModelAndView();
 		
 		ArrayList<Door> doors = doorDao.getAllDoors();
@@ -68,4 +67,42 @@ public class DoorController {
 		
 		return new RedirectView("/doors", true);
 	}
+
+	@GetMapping("/doors/delete")
+	public ModelAndView deleteDoor() {
+		ModelAndView mav = new ModelAndView("deleteDoor");
+		return mav;
+	}
+
+	
+	@PostMapping("/doors/delete")
+	public ModelAndView deleteDoor(@RequestParam int id) throws SQLException, IOException {
+		ModelAndView mav = new ModelAndView("redirect:/doors");
+		
+		Door toBeDeleted = doorDao.getById(id);
+		if( toBeDeleted != null) {
+			doorDao.deleteDoor(id);
+		}
+		
+		return mav;
+	}
+	
+	@GetMapping("/doors/update")
+	public ModelAndView updateDoor() {
+		return new ModelAndView("updateDoor");
+	}
+	
+	@PostMapping("/doors/update")
+	public ModelAndView updateDoor(@RequestParam int id, @RequestParam String material, @RequestParam double height,
+			 @RequestParam double width,  @RequestParam LocalDate installationDate) throws SQLException, IOException {
+		ModelAndView mav = new ModelAndView("redirect:/doors");
+		System.out.println("id ul este: " + id);
+		Door toBeUpdated = doorDao.getById(id);
+		if (toBeUpdated != null) {
+			doorDao.updateDoor(new Door(id, material, height, width, installationDate));
+		}
+		
+		return mav;
+	}
+	
 }

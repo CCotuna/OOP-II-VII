@@ -1,4 +1,4 @@
-package com.example;
+package com.spring.pojo;
 
 import java.time.LocalDate;
 

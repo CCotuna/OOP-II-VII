@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.example.Door"  %>
+<%@ page import="com.spring.pojo.Door"  %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,9 @@
 </head>
 <body>
 
-	<h1>Hi there </h1>
+    <div class="rounded bg-black w-min p-4">
+    	<p class="text-white">Hi there </p>
+    </div>
 
 	<% Door door = (Door) request.getAttribute("door");%>
 	<% if(door != null) { %>
@@ -20,5 +23,8 @@
 					<p> Door installationDate: <%=door.getInstallationDate() %></p>
 	<%} %>
 	
+	<a href="/Woods-MVC/doors">Back to homepage.</a>
+
+	<script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
