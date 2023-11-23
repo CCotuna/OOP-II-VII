@@ -9,8 +9,6 @@ public class DBHelper {
 
 	private static Connection conn;
 	
-// am creat doua metode statice, care sa ne dea conectiunea si sa ne inchida conectiunea
-// * aici
 	public static Connection getConnection() throws SQLException {
 
 		try {
@@ -28,7 +26,6 @@ public class DBHelper {
 		return conn;
 	}
 
-	// * si aici
 	public static void closeConnection() {
 		try {
 			conn.close();

@@ -58,7 +58,6 @@ public class DoorController {
 		return new ModelAndView("addDoor");
 	}
 	
-	//RedirectView 
 	@PostMapping("/doors/create")
 	public RedirectView createNewDoor(@RequestParam String material, @RequestParam double height, @RequestParam double width, @RequestParam LocalDate installationDate) throws SQLException {
 		Door door = new Door(material, height, width, installationDate);
@@ -96,7 +95,7 @@ public class DoorController {
 	public ModelAndView updateDoor(@RequestParam int id, @RequestParam String material, @RequestParam double height,
 			 @RequestParam double width,  @RequestParam LocalDate installationDate) throws SQLException, IOException {
 		ModelAndView mav = new ModelAndView("redirect:/doors");
-		System.out.println("id ul este: " + id);
+
 		Door toBeUpdated = doorDao.getById(id);
 		if (toBeUpdated != null) {
 			doorDao.updateDoor(new Door(id, material, height, width, installationDate));
@@ -104,5 +103,4 @@ public class DoorController {
 		
 		return mav;
 	}
-	
 }
