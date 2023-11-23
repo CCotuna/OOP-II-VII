@@ -3,7 +3,6 @@ package com.example;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -58,5 +57,18 @@ public class DoorDao {
 		}
 		DBHelper.closeConnection();
 		return doors;
+	}
+	
+	public void insertDoor(Door door) throws SQLException {
+		Connection conn = DBHelper.getConnection();
+		String query = "insert into doors(material, height, width, installationDate) values(?,?,?,?)";
+		PreparedStatement ps = conn.prepareStatement(query);
+		
+		ps.setString(1, door.getMaterial());
+		ps.setDouble(2, door.getHeight());
+		ps.setDouble(3, door.getWidth());
+		ps.setDate(4, java.sql.Date.valueOf(door.getInstallationDate()));
+		
+		ps.executeUpdate();
 	}
 }

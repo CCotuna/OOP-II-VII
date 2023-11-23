@@ -41,5 +41,6 @@
 	<% } %>	
 </table>
 	
+<a href="doors/create" >Hehe, Create a new Door</a>
 </body>
 </html>

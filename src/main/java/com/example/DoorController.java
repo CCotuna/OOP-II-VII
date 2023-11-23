@@ -2,6 +2,7 @@ package com.example;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class DoorController {
@@ -37,7 +40,6 @@ public class DoorController {
 		
 	}
 
-
 	@GetMapping("/doors")
 	 ModelAndView getAllDoors() throws SQLException {
 		ModelAndView mav = new ModelAndView();
@@ -50,5 +52,20 @@ public class DoorController {
 		mav.setViewName(doors.isEmpty() ? "dbErrorPage" : "doors");
 		
 		return mav;
+	}
+	
+	@GetMapping("/doors/create")
+	public ModelAndView createDoor() {
+		return new ModelAndView("addDoor");
+	}
+	
+	//RedirectView 
+	@PostMapping("/doors/create")
+	public RedirectView createNewDoor(@RequestParam String material, @RequestParam double height, @RequestParam double width, @RequestParam LocalDate installationDate) throws SQLException {
+		Door door = new Door(material, height, width, installationDate);
+		
+		doorDao.insertDoor(door);
+		
+		return new RedirectView("/doors", true);
 	}
 }

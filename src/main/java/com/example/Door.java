@@ -53,6 +53,14 @@ public class Door {
 		this.width = width;
 		this.installationDate = installationDate;
 	}
+	
+	public Door( String material, double height, double width, LocalDate installationDate) {
+		this.material = material;
+		this.height = height;
+		this.width = width;
+		this.installationDate = installationDate;
+	}
+	
 	public Door() {
 	}
 	
